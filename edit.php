@@ -16,8 +16,8 @@ $row = $result->fetch_assoc();
 
 <!--
   The same kind of form as add.php, but each field is PRE-FILLED using
-  value="<?php echo $row['...']; ?>"  so the user sees the current data
-  and can change it. <?php echo ... ?> prints a PHP value into the HTML.
+  value="<?php // echo $row['...']; ?>"  so the user sees the current data
+  and can change it. <?php // echo ... ?> prints a PHP value into the HTML.
 -->
 <form method="post">
   Name: <input type="text" name="name" value="<?php echo $row['name']; ?>"><br>
