@@ -10,8 +10,8 @@
 // In PHP, a word starting with $ is a "variable" (a labelled box that stores a value).
 $servername = "localhost";       // Where the database server runs. "localhost" = this same computer.
 $username   = "root";            // The MySQL user name. "root" is the default administrator user.
-$password   = "sayang123";       // The MySQL password. Leave "" (empty) if you use XAMPP. This value is only for the DBEAVER setup.
-$dbname     = "database-tuto";   // The name of the database we want to open.
+$password   = "";       // The MySQL password. Leave "" (empty) if you use XAMPP. This value is only for the DBEAVER setup.
+$dbname     = "students_results";   // The name of the database we want to open.
 
 // --- Create the connection ---
 // `mysqli` is a class that is built into PHP itself (its name means "MySQL Improved").

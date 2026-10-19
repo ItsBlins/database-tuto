@@ -1,45 +1,73 @@
 <?php include 'db.php'; ?>
-<!--
-  index.php — READ (the "R" in CRUD)
-  Lists every student from the database in a table.
-  The line above runs db.php first, so $conn (our database
-  connection) already exists and is ready to use here.
--->
-<h2>Student List</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- A link (the <a> "anchor" tag). Clicking it opens the add-student page. -->
-<a href="add.php">Add New Student</a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Result System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-<!-- Start an HTML table. border="1" draws the grid lines; cellpadding adds spacing inside each cell. -->
-<table border="1" cellpadding="10">
-<tr>
-  <!-- <tr> = table row.  <th> = a bold header cell (table heading). -->
-  <th>ID</th><th>Name</th><th>Email</th><th>Course</th><th>Action</th>
-</tr>
-<?php
-// $conn->query(...) sends an SQL command to the database and returns the result.
-// "SELECT * FROM students" means: fetch ALL columns (*) of every row in the "students" table.
-$result = $conn->query("SELECT * FROM students");
+    .login-box {
+      background-color: white;
+      padding: 40px;
+      width: 350px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
 
-// A "while" loop repeats its block once for each row that comes back.
-// $result->fetch_assoc() returns the NEXT row as an "associative array"
-// (an array whose values are read by column name, e.g. $row['name']).
-// When there are no rows left it returns null, which ends the loop.
-while($row = $result->fetch_assoc()) {
-  // echo prints HTML to the page. The dots ( . ) glue the text and the variables together.
-  // <td> = a normal table cell (table data).
-  echo "<tr>
-    <td>".$row['id']."</td>
-    <td>".$row['name']."</td>
-    <td>".$row['email']."</td>
-    <td>".$row['course']."</td>
-    <td>
-      <a href='edit.php?id=".$row['id']."'>Edit</a> |
-      <a href='delete.php?id=".$row['id']."'>Delete</a>
-    </td>
-  </tr>";
-  // Note: edit.php?id=...  and  delete.php?id=...  put the student's id into the
-  // URL, so the next page knows exactly which student to edit or delete.
-}
-?>
-</table>
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-box">
+    <h1>Student Result System</h1>
+    <p>Enter your email to continue</p>
+    <form action="login.php" method="POST"> <input type="email" name="email" placeholder="Enter your email" required> <button type="submit">Login</button> </form>
+  </div>
+</body>
+
+</html>
