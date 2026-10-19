@@ -1,15 +1,49 @@
-<?php include 'db.php';
-// delete.php — DELETE (the "D" in CRUD)
-// This page has no HTML of its own. It just deletes one student
-// and then immediately sends the user back to the list.
+<?php
 
-// Read which student to remove from the URL   (delete.php?id=5  ->  $id = 5).
-$id = $_GET['id'];
+include "db.php";
 
-// "DELETE FROM students WHERE id=$id" removes ONLY the row with this id.
-// WARNING: leaving out the WHERE would delete every student in the table!
-$conn->query("DELETE FROM students WHERE id=$id");
+/* =========================
+   GET STUDENT ID
+   ========================= */
 
-// header("Location: ...") redirects the browser back to the list page.
-header("Location: index.php");
+if (!isset($_GET["id"])) {
+    die("Student ID not provided.");
+}
+
+$id = intval($_GET["id"]);
+
+
+/* =========================
+   DELETE RESULTS
+   ========================= */
+
+$sqlResults = "DELETE FROM education_results WHERE id = $id";
+
+if ($conn->query($sqlResults) === TRUE) {
+
+
+    /* =========================
+       DELETE STUDENT
+       ========================= */
+
+    $sqlUser = "DELETE FROM education_users WHERE id = $id";
+
+    if ($conn->query($sqlUser) === TRUE) {
+
+        // Return to admin dashboard
+        header("Location: admin.php");
+        exit();
+
+    } else {
+
+        die("Error deleting student: " . $conn->error);
+
+    }
+
+} else {
+
+    die("Error deleting results: " . $conn->error);
+
+}
+
 ?>
